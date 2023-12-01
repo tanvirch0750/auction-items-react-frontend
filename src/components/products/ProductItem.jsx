@@ -35,7 +35,10 @@ function ProductItem() {
         </p>
         <div className="card-actions flex justify-between mt-6">
           <div className="px-4 py-2 text-white bg-orange-700">Available</div>
-          <Link className="px-4 py-2 bg-text-emerald-600 bg-emerald-600">
+          <Link
+            to="/products/dfdfd"
+            className="px-4 py-2 bg-text-emerald-600 bg-emerald-600"
+          >
             Details
           </Link>
         </div>

@@ -2,6 +2,9 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import AppLayout from './components/ui/AppLayout';
 import Home from './pages/Home';
 
+import Signin from './pages/Signin';
+import Signup from './pages/Signup';
+
 function App() {
   return (
     <>
@@ -10,6 +13,8 @@ function App() {
           <Route element={<AppLayout />}>
             <Route index element={<Navigate replace to="home" />} />
             <Route path="home" element={<Home />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="signin" element={<Signin />} />
           </Route>
         </Routes>
       </BrowserRouter>

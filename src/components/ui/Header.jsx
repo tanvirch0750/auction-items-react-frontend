@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function Header() {
   return (
     <div className="navbar bg-gray-900 py-4">
@@ -39,15 +41,15 @@ function Header() {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">
+        <a className="btn btn-ghost text-2xl uppercase">
           <span>Sport</span>
-          <span>Bids</span>
+          <span className=" text-emerald-600">Bids</span>
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li>
             <details>
@@ -68,8 +70,18 @@ function Header() {
         </ul>
       </div>
       <div className="navbar-end mr-4 flex items-center gap-4">
-        <a className="btn bg-emerald-600 px-8">Sign In</a>
-        <a className="btn bg-emerald-600 px-8">Sign Up</a>
+        <Link
+          to="/signin"
+          className="btn bg-emerald-600 px-8 hover:bg-emerald-500"
+        >
+          Sign In
+        </Link>
+        <Link
+          to="/signup"
+          className="btn bg-emerald-600 px-8 hover:bg-emerald-500"
+        >
+          Sign Up
+        </Link>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import InputBox from '../components/form/InputBox';
 
 function AuctionRoom() {
   return (
-    <div className="mt-6 grid grid-cols-1 gap-12 px-2 md:grid-cols-3 md:gap-6 py-24 items-start">
+    <div className="mt-6 grid grid-cols-1 gap-12 px-2 md:grid-cols-3 md:gap-6 py-24">
       <div className=" bg-gray-900 p-2">
         <h2 className="text-center capitalize text-emerald-500">
           Product Details

@@ -54,6 +54,9 @@ function Header() {
           <li>
             <Link to="/products">Products</Link>
           </li>
+          <li>
+            <Link to="/create-product">Add Product</Link>
+          </li>
         </ul>
       </div>
       <div className="navbar-end mr-4 flex items-center gap-4">

@@ -4,7 +4,7 @@ import { userLoggedOut } from '../features/auth/authSlice';
 const baseQuery = fetchBaseQuery({
   baseUrl: 'http://localhost:5001/api/v1',
   prepareHeaders: async (headers, { getState }) => {
-    const token = getState().auth.accessToken;
+    const token = getState()?.auth?.accessToken;
     if (token) {
       headers.set('authorization', `${token}`);
     }
@@ -17,13 +17,13 @@ export const api = createApi({
   baseQuery: async (args, api, extraOptions) => {
     const result = await baseQuery(args, api, extraOptions);
 
-    if (result.error?.status === 401) {
+    if (result?.error?.status === 401) {
       api.dispatch(userLoggedOut());
       localStorage.clear();
     }
 
     return result;
   },
-  tagTypes: ['Books', 'Book', 'Review', 'Wishlist', 'Tracks', 'Track'],
+  tagTypes: [],
   endpoints: () => ({}),
 });

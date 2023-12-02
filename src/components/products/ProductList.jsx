@@ -1,13 +1,12 @@
+/* eslint-disable react/prop-types */
 import ProductItem from './ProductItem';
 
-function ProductList() {
+function ProductList({ products }) {
   return (
     <ul className="mt-6 grid grid-cols-1 gap-12 px-2 md:grid-cols-3 md:gap-6">
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
+      {products?.map((product) => (
+        <ProductItem product={product} key={product.id} />
+      ))}
     </ul>
   );
 }

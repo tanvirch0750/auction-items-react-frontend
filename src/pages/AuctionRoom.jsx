@@ -74,7 +74,10 @@ function AuctionRoom() {
           bidderId={userInfo?.userId}
           productOwnerId={product?.data?.productOwnerId}
         />
-        <MessageSection />
+        <MessageSection
+          productId={product?.data?.id}
+          senderId={userInfo?.userId}
+        />
       </div>
     </div>
   );

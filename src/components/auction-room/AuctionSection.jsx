@@ -20,17 +20,17 @@ function AuctionSection({
     isError,
   } = useGetAuctionHistoriesQuery({
     page: 1,
-    limit: 100,
+    limit: 1000,
   });
+
+  const newHistories = auctionHistories?.data?.filter(
+    (auc) => auc?.product?.id === productId
+  );
 
   const [
     addAuctionHistory,
     { data, isLoading: addLoading, isError: addError, isSuccess: addSuccess },
   ] = useAddAuctionHistoryMutation();
-
-  console.log(data?.data?.abh?.product?.auctionStatus);
-
-  console.log(data);
 
   useEffect(() => {
     if (addSuccess) {
@@ -79,7 +79,7 @@ function AuctionSection({
     );
   }
 
-  if (!isLoading && !isError && auctionHistories?.data?.length === 0) {
+  if (!isLoading && !isError && newHistories?.length === 0) {
     content = (
       <p className="mt-4 rounded-md bg-green-100 p-2 text-lg text-green-700">
         No Bid yet
@@ -87,8 +87,8 @@ function AuctionSection({
     );
   }
 
-  if (!isLoading && !isError && auctionHistories?.data?.length > 0) {
-    content = auctionHistories?.data?.map((ah) => (
+  if (!isLoading && !isError && newHistories?.length > 0) {
+    content = newHistories?.map((ah) => (
       <AuctionCard key={ah?.id} auction={ah} />
     ));
   }

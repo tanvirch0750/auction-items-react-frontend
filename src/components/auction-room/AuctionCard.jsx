@@ -1,15 +1,7 @@
+import formatTime from '../../utils/formatTime';
+
 /* eslint-disable react/prop-types */
 function AuctionCard({ auction }) {
-  function formatTime(isoDateTime) {
-    const dateObject = new Date(isoDateTime);
-    const options = {
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-      timeZoneName: 'short',
-    };
-    return dateObject.toLocaleTimeString('en-US', options);
-  }
   return (
     <div className="card w-full bg-gray-900 shadow-xl">
       <div className="p-2">

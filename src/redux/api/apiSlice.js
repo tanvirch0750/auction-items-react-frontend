@@ -24,6 +24,6 @@ export const api = createApi({
 
     return result;
   },
-  tagTypes: ['Products', 'Product'],
+  tagTypes: ['Products', 'Product', 'Auction_Histories', 'Auction_History'],
   endpoints: () => ({}),
 });

@@ -68,7 +68,12 @@ function AuctionRoom() {
       )}
       <div className="grid grid-cols-1 gap-12 px-2 md:grid-cols-3 md:gap-6 py-24">
         <DetailSection product={product?.data} />
-        <AuctionSection auctionStatus={product?.data?.auctionStatus} />
+        <AuctionSection
+          auctionStatus={product?.data?.auctionStatus}
+          productId={product?.data?.id}
+          bidderId={userInfo?.userId}
+          productOwnerId={product?.data?.productOwnerId}
+        />
         <MessageSection />
       </div>
     </div>

@@ -1,20 +1,16 @@
 import { jwtDecode } from 'jwt-decode';
 import { useSelector } from 'react-redux';
 
-const useAuth = () => {
+const useUserInfo = () => {
   const auth = useSelector((state) => state.auth);
 
-  let user;
-
-  if (auth?.accessToken) {
-    user = jwtDecode(auth?.accessToken);
-  }
+  const user = jwtDecode(auth?.accessToken);
 
   if (auth?.accessToken && user?.userId) {
-    return true;
+    return user;
   } else {
-    return false;
+    return null;
   }
 };
 
-export default useAuth;
+export default useUserInfo;

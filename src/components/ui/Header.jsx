@@ -1,6 +1,20 @@
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { api } from '../../redux/api/apiSlice';
+import { userLoggedOut } from '../../redux/features/auth/authSlice';
 
 function Header() {
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logout = () => {
+    dispatch(userLoggedOut());
+    localStorage.clear();
+    dispatch(api.util.resetApiState());
+    navigate('/signin');
+  };
+
   return (
     <div className="navbar bg-gray-900 py-4">
       <div className="navbar-start">
@@ -54,24 +68,39 @@ function Header() {
           <li>
             <Link to="/products">Products</Link>
           </li>
-          <li>
-            <Link to="/create-product">Add Product</Link>
-          </li>
+          {auth?.accessToken && (
+            <li>
+              <Link to="/create-product">Add Product</Link>
+            </li>
+          )}
         </ul>
       </div>
       <div className="navbar-end mr-4 flex items-center gap-4">
-        <Link
-          to="/signin"
-          className="btn bg-emerald-600 px-8 hover:bg-emerald-500"
-        >
-          Sign In
-        </Link>
-        <Link
-          to="/signup"
-          className="btn bg-emerald-600 px-8 hover:bg-emerald-500"
-        >
-          Sign Up
-        </Link>
+        {!auth?.accessToken ? (
+          <>
+            {' '}
+            <Link
+              to="/signin"
+              className="btn bg-emerald-600 px-8 hover:bg-emerald-500"
+            >
+              Sign In
+            </Link>
+            <Link
+              to="/signup"
+              className="btn bg-emerald-600 px-8 hover:bg-emerald-500"
+            >
+              Sign Up
+            </Link>{' '}
+          </>
+        ) : (
+          <button
+            to="/signup"
+            className="btn bg-emerald-600 px-8 hover:bg-emerald-500"
+            onClick={logout}
+          >
+            Logout
+          </button>
+        )}
       </div>
     </div>
   );

@@ -1,9 +1,14 @@
 import formatTime from '../../utils/formatTime';
 
 /* eslint-disable react/prop-types */
-function AuctionCard({ auction }) {
+function AuctionCard({ auction, isLast }) {
+  console.log(isLast);
   return (
-    <div className="card w-full bg-gray-900 shadow-xl">
+    <div
+      className={`card w-full bg-gray-900 shadow-xl ${
+        isLast ? 'border border-emerald-500 bg-gray-700' : ''
+      }`}
+    >
       <div className="p-2">
         <h2 className="card-title text-sm">
           Current Total Bid -{' '}
@@ -26,6 +31,13 @@ function AuctionCard({ auction }) {
             {formatTime(auction?.createdAt)}
           </span>
         </p>
+        {isLast && (
+          <p className="text-sm mt-4">
+            <span className=" text-green-500 uppercase font-bold">
+              Current Winner
+            </span>
+          </p>
+        )}
       </div>
     </div>
   );

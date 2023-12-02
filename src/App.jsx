@@ -7,6 +7,7 @@ import PublicRoute from './components/ui/PublicRoute';
 import useAuthCheck from './hooks/useAuthCheck';
 import AuctionRoom from './pages/AuctionRoom';
 import CreateProduct from './pages/CreateProduct';
+import MyProducts from './pages/MyProducts';
 import Products from './pages/Products';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
@@ -23,6 +24,14 @@ function App() {
             <Route index element={<Navigate replace to="home" />} />
             <Route path="home" element={<Home />} />
             <Route path="products" element={<Products />} />
+            <Route
+              path="my-products"
+              element={
+                <PrivateRoute>
+                  <MyProducts />
+                </PrivateRoute>
+              }
+            />
             <Route
               path="products/:id"
               element={

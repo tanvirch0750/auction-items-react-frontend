@@ -69,9 +69,14 @@ function Header() {
             <Link to="/products">Products</Link>
           </li>
           {auth?.accessToken && (
-            <li>
-              <Link to="/create-product">Add Product</Link>
-            </li>
+            <>
+              <li>
+                <Link to="/create-product">Add Product</Link>
+              </li>
+              <li>
+                <Link to="/my-products">My Products</Link>
+              </li>
+            </>
           )}
         </ul>
       </div>

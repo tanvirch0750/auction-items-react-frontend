@@ -2,7 +2,6 @@ import formatTime from '../../utils/formatTime';
 
 /* eslint-disable react/prop-types */
 function MessageCard({ msg }) {
-  console.log(msg);
   return (
     <div className="card w-full bg-gray-800 shadow-xl">
       <div className="p-2">

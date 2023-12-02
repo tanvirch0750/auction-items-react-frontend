@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 
 import { useEffect } from 'react';
@@ -6,6 +7,7 @@ import AuctionSection from '../components/auction-room/AuctionSection';
 import DetailSection from '../components/auction-room/DetailSection';
 import MessageSection from '../components/auction-room/MessageSection';
 import useUserInfo from '../hooks/useUserInfo';
+import { useAddAuctionWinnerMutation } from '../redux/features/auction-winner/auctionWinnerApi';
 import {
   useEditProductMutation,
   useGetProductQuery,
@@ -18,8 +20,24 @@ function AuctionRoom() {
   const { data: product, isLoading, isError } = useGetProductQuery(id);
   const [
     editProduct,
-    { isLoading: editLoading, isError: editError, isSuccess: editSuccess },
+    {
+      data: editedProduct,
+      isLoading: editLoading,
+      isError: editError,
+      isSuccess: editSuccess,
+    },
   ] = useEditProductMutation();
+
+  const [
+    addAuctionWinner,
+    {
+      isLoading: winnerLoading,
+      isError: winnerError,
+      isSuccess: winnerSuccess,
+    },
+  ] = useAddAuctionWinnerMutation();
+
+  console.log(product);
 
   useEffect(() => {
     if (editSuccess) alert('Bidding Status updated');
@@ -36,6 +54,13 @@ function AuctionRoom() {
 
   function endBidding() {
     editProduct({ id: product?.data?.id, data: { auctionStatus: 'end' } });
+    const res = editedProduct?.data?.auctionBiddingHistory;
+    const winner = res[res?.length - 1];
+
+    addAuctionWinner({
+      auctionWinnerId: winner?.bidderId,
+      productId: winner?.productId,
+    });
   }
 
   return (

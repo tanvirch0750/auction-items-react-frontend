@@ -88,8 +88,8 @@ function AuctionSection({
   }
 
   if (!isLoading && !isError && newHistories?.length > 0) {
-    content = newHistories?.map((ah) => (
-      <AuctionCard key={ah?.id} auction={ah} />
+    content = newHistories?.map((ah, index) => (
+      <AuctionCard key={ah?.id} auction={ah} isLast={index === 0} />
     ));
   }
 

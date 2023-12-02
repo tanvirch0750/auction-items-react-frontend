@@ -31,6 +31,8 @@ export const api = createApi({
     'Auction_History',
     'Messages',
     'Message',
+    'Auction_Winners',
+    'Auction_Winner',
   ],
   endpoints: () => ({}),
 });

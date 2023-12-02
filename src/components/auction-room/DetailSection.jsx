@@ -54,6 +54,32 @@ function DetailSection({ product }) {
               <span className=" text-gray-400">{product?.description}</span>
             </p>
           </div>
+          <div className="mt-4">
+            <p>
+              <span>Seller Name:</span>
+              <span className=" inline-block pl-2 font-bold text-orange-600">
+                {product?.productOwner?.fullName}
+              </span>
+            </p>
+            <p>
+              <span>Contact No:</span>
+              <span className=" inline-block pl-2 font-bold text-gray-400">
+                {product?.productOwner?.contactNumber}
+              </span>
+            </p>
+            <p>
+              <span>Email:</span>
+              <span className=" inline-block pl-2 font-bold text-gray-400">
+                {product?.productOwner?.email}
+              </span>
+            </p>
+            <p>
+              <span>Address:</span>
+              <span className=" inline-block pl-2 font-bold text-gray-400">
+                {product?.productOwner?.address}
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </div>

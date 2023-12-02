@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import AuctionCard from './AuctionCard';
 
-function AuctionSection() {
+function AuctionSection({ auctionStatus }) {
   return (
     <div className=" bg-gray-800 p-2">
       <h2 className="text-center capitalize text-emerald-500">Auction Place</h2>
@@ -10,9 +11,11 @@ function AuctionSection() {
         <AuctionCard />
         <AuctionCard />
       </div>
-      <div className="mt-4 flex justify-end">
-        <button className="bg-emerald-500 px-6 py-2">Bid</button>
-      </div>
+      {auctionStatus === 'ongoing' && (
+        <div className="mt-4 flex justify-end">
+          <button className="bg-emerald-500 px-6 py-2">Bid</button>
+        </div>
+      )}
     </div>
   );
 }

@@ -43,13 +43,19 @@ function ProductItem({ product }) {
         <p>
           <span>Initial Bidding Price:</span>
           <span className=" inline-block pl-2 font-bold text-orange-600">
-            10000
+            {product?.initialBiddingPrice}
+          </span>
+        </p>
+        <p>
+          <span>Bid Increment Price:</span>
+          <span className=" inline-block pl-2 font-bold text-orange-600">
+            {product?.incrementAmount}
           </span>
         </p>
         <div className="card-actions flex justify-between mt-6">
           <div className="px-4 py-2 text-white bg-orange-700">{available}</div>
           <Link
-            to="/products/dfdfd"
+            to={`/products/${product?.id}`}
             className="px-4 py-2 bg-text-emerald-600 bg-emerald-600"
           >
             Details

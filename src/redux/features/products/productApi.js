@@ -31,7 +31,7 @@ const productApi = api.injectEndpoints({
     }),
     getProduct: builder.query({
       query: (id) => `/product/${id}`,
-      // @ts-ignore
+
       providesTags: (result, error, arg) => [{ type: 'Product', id: arg }],
     }),
     addProduct: builder.mutation({

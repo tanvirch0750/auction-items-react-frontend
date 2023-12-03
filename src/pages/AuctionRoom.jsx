@@ -37,8 +37,6 @@ function AuctionRoom() {
     },
   ] = useAddAuctionWinnerMutation();
 
-  console.log(product);
-
   useEffect(() => {
     if (editSuccess) alert('Bidding Status updated');
     if (editError) alert('Bidiing status update failed, try again');

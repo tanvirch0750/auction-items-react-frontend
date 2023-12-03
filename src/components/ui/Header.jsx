@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import useUserInfo from '../../hooks/useUserInfo';
 import { api } from '../../redux/api/apiSlice';
 import { userLoggedOut } from '../../redux/features/auth/authSlice';
 
@@ -7,6 +8,7 @@ function Header() {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const userInfo = useUserInfo();
 
   const logout = () => {
     dispatch(userLoggedOut());
@@ -98,13 +100,21 @@ function Header() {
             </Link>{' '}
           </>
         ) : (
-          <button
-            to="/signup"
-            className="btn bg-emerald-600 px-8 hover:bg-emerald-500"
-            onClick={logout}
-          >
-            Logout
-          </button>
+          <>
+            <div
+              to="/signup"
+              className="btn bg-orange-600 px-8 hover:bg-orange-500"
+            >
+              {userInfo?.fullName}
+            </div>
+            <button
+              to="/signup"
+              className="btn bg-emerald-600 px-8 hover:bg-emerald-500"
+              onClick={logout}
+            >
+              Logout
+            </button>
+          </>
         )}
       </div>
     </div>

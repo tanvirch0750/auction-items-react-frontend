@@ -1,12 +1,17 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
+import { io } from 'socket.io-client';
 import {
   useAddMessageMutation,
   useGetMessagesQuery,
 } from '../../redux/features/message/messageApi';
 import InputBox from '../form/InputBox';
 import MessageCard from './MessageCard';
+
+const ENDPOINT = 'http://localhost:5001';
+let socket = io(ENDPOINT);
 
 function MessageSection({ productId, senderId }) {
   const [content, setContent] = useState('');
@@ -15,6 +20,7 @@ function MessageSection({ productId, senderId }) {
     data: messages,
     isLoading,
     isError,
+    refetch,
   } = useGetMessagesQuery({
     page: 1,
     limit: 1000,
@@ -30,7 +36,17 @@ function MessageSection({ productId, senderId }) {
   ] = useAddMessageMutation();
 
   useEffect(() => {
+    socket.on('receive_message2', (data) => {
+      if (data === productId) {
+        console.log(data === productId);
+        refetch();
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     if (addSuccess) {
+      socket.emit('messageRoom', productId);
       alert('Message added successfully');
     }
 

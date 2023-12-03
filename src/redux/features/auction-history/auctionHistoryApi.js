@@ -26,6 +26,9 @@ const auctionHistoryApi = api.injectEndpoints({
 
         return queryString;
       },
+      transformResponse: (response) => {
+        return response;
+      },
       keepUnusedDataFor: 600,
       providesTags: ['Auction_Histories'],
     }),

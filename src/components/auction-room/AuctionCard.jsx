@@ -2,7 +2,6 @@ import formatTime from '../../utils/formatTime';
 
 /* eslint-disable react/prop-types */
 function AuctionCard({ auction, isLast }) {
-  console.log(isLast);
   return (
     <div
       className={`card w-full bg-gray-900 shadow-xl ${

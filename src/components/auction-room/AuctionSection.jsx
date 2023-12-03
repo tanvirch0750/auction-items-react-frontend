@@ -1,12 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useEffect } from 'react';
+import { io } from 'socket.io-client';
 import Swal from 'sweetalert2';
 import {
   useAddAuctionHistoryMutation,
   useGetAuctionHistoriesQuery,
 } from '../../redux/features/auction-history/auctionHistoryApi';
 import AuctionCard from './AuctionCard';
+
+const ENDPOINT = 'http://localhost:5001';
+let socket = io(ENDPOINT);
 
 function AuctionSection({
   auctionStatus,
@@ -18,6 +23,7 @@ function AuctionSection({
     data: auctionHistories,
     isLoading,
     isError,
+    refetch,
   } = useGetAuctionHistoriesQuery({
     page: 1,
     limit: 1000,
@@ -33,12 +39,23 @@ function AuctionSection({
   ] = useAddAuctionHistoryMutation();
 
   useEffect(() => {
+    socket.on('receive_message', (data) => {
+      if (data === productId) {
+        console.log(data === productId);
+        refetch();
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     if (addSuccess) {
       Swal.fire({
         title: 'Confirmed',
         text: 'Your Bid is recorded.',
         icon: 'success',
       });
+
+      socket.emit('auctionRoom', productId);
     }
 
     if (addError) {
@@ -48,7 +65,7 @@ function AuctionSection({
         icon: 'error',
       });
     }
-  }, [addSuccess, addError]);
+  }, [addSuccess, addError, productId]);
 
   function handleBid() {
     Swal.fire({
@@ -94,9 +111,8 @@ function AuctionSection({
   }
 
   return (
-    <div className=" bg-gray-800 p-2">
+    <div className=" bg-gray-800 p-2 ">
       <h2 className="text-center capitalize text-emerald-500">Auction Place</h2>
-      <div className="mt-4 grid grid-cols-1 gap-2">{content}</div>
       {auctionStatus === 'ongoing' &&
         bidderId !== productOwnerId &&
         data?.data?.abh?.product?.auctionStatus !== 'end' &&
@@ -111,6 +127,9 @@ function AuctionSection({
             </button>
           </div>
         )}
+      <div className="mt-4 grid grid-cols-1 gap-2 max-h-[500px] overflow-y-scroll">
+        {content}
+      </div>
     </div>
   );
 }
